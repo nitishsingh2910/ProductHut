@@ -53,6 +53,10 @@ exports.postEditProduct = (req, res, next) => {
 
 }
 
+exports.postDeleteProduct = (req, res, next) => {
+  const prodId = req.body.productId;
+}
+
 
 exports.getProducts = (req, res, next) => {
   Product.fetchAll((products) => {
