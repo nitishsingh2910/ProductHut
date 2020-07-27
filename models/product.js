@@ -8,7 +8,7 @@ module.exports = class Product{
         this.imageUrl = imageUrl;
         this.description = description;
         this.price = price;
-        this._id = new mongodb.ObjectID(id);
+        this._id = id ? new mongodb.ObjectID(id) : null;
     }
 
     save(){
@@ -48,6 +48,17 @@ module.exports = class Product{
             .then(product => {
                 console.log(product);
                 return product;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    static deleteById(prodId){
+        const db = getDb();
+        return db.collection('products').deleteOne({_id: new mongodb.ObjectID(prodId)})
+            .then(result => {
+                console.log('Deleted Product');
             })
             .catch(err => {
                 console.log(err);
