@@ -1,4 +1,5 @@
 const Cart = require('./cart');
+const mongodb = require('mongodb');
 const getDb = require('../util/database').getDb;
 
 module.exports = class Product{
@@ -26,6 +27,18 @@ module.exports = class Product{
             .then(products => {
                 console.log(products);
                 return products;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    static findById(prodId){
+        const db = getDb();
+        return db.collection('products').findOne({_id: mongodb.ObjectID(prodId)})
+            .then(product => {
+                console.log(product);
+                return product;
             })
             .catch(err => {
                 console.log(err);
