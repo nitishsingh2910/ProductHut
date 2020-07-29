@@ -49,6 +49,7 @@ class User {
             {_id: new mongodb.ObjectId(this._id)}, 
             {$set: {cart: updatedCart}} );
     }
+
     static findById(userId){
         const db = getDb();
         return db.collection('users').findOne({_id: new mongodb.ObjectID(userId)})
@@ -79,6 +80,19 @@ class User {
                     return {...product, quantity: quantities[product._id]};
                 });
             });
+    }
+
+    deleteItemFromCart(productId){
+        const updatedCartItems = this.cart.items.filter(item => {
+            return item.productId.toString() !== productId.toString();
+        });
+
+        const updatedCart = {items: updatedCartItems};
+
+        const db = getDb();
+        return db.collection('users').updateOne(
+            {_id: new mongodb.ObjectId(this._id)}, 
+            {$set: {cart: updatedCart}} );
     }
 }
 
