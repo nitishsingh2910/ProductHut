@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
-    User.findById("5f1e6270f93d1f8e3abe2ec4")
+    User.findById('5f22596706aad86d3c90da24')
         .then(user => {
             req.user = new User(user.name, user.email, user.cart, user._id);
             next();
@@ -27,7 +27,6 @@ app.use((req, res, next) => {
             console.log(err);
         })
 });
-
 
 // middlewares
 
