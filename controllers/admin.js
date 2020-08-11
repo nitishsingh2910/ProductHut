@@ -14,7 +14,7 @@ exports.postAddProduct = (req, res, next) => {
   const imageUrl = req.body.imageUrl;
   const description = req.body.description;
   const price = req.body.price;
-
+  // console.log("Inside admin add prodcut");
   const product = new Product({
     title: title,
     price: price, 
